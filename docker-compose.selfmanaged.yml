@@ -10,6 +10,8 @@ x-logging:
 services:
   pgadmin:
     image: dpage/pgadmin4:latest
+    ports:
+      - "443:443"
     volumes:
       - /private/var/lib/pgadmin:/var/lib/pgadmin 
       - /path/to/certificate.cert:/certs/server.cert 
