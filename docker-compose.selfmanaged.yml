@@ -1,0 +1,23 @@
+version: '2'
+
+x-logging:
+  &default-logging
+  logging:
+    driver: json-file
+    options:
+      max-size: 100m
+
+services:
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    volumes:
+      - /private/var/lib/pgadmin:/var/lib/pgadmin 
+      - /path/to/certificate.cert:/certs/server.cert 
+      - /path/to/certificate.key:/certs/server.key 
+      - /tmp/servers.json:/pgadmin4/servers.json 
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=john.doe@domain.com
+      - PGADMIN_DEFAULT_PASSWORD=SuperSecret
+      - PGADMIN_DEFAULT_TLS=True
+    <<: *default-logging
+    restart: always
